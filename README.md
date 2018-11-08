@@ -1,44 +1,31 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React Piano Task
 
-## Available Scripts
+Build a small piano application that can play sounds, as well as store and retrieve sequences of played keys (songs).
 
-In the project directory, you can run:
+*If anything here is unclear or any questions come to your mind, don’t hesitate to contact us - we’re here for you!*
 
-### `npm start`
+## Implementation instructions
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Focus on **clean, readable Code** and **Simplicity**
+- Use **React** for the Frontend
+- For the piano sounds you can use the [given files](#piano-sounds) files or any of your choice
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Minimum requirements
 
-### `npm test`
+- Piano UI:
+    - Clickable black and white keys, which play a sound when clicked
+    - Visual feedback on touching the keys
+- Song storage & playback functionality:
+    - Provide a button to start/stop recording a sequence of keys played on the Piano UI
+    - Define a song title when storing a song on stop recording
+    - Show a list of stored songs with title
+    - Enable replaying stored songs with a small play button next to the title
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Optional features
 
-### `npm run build`
+- Enable **correct timing** of played keys for recording & playing songs
+- Store and retrieve the songs from a **GraphQL** server instead of from a local storage (sample server given here: [Apollo Server](apollo-server))
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Piano Sounds
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+The directory `grand-piano-mp3-sounds` contains sample sounds you can use for this task. Alternatively you can use sounds from `https://github.com/pffy/mp3-piano-sound` or other sample sounds of your preference.
