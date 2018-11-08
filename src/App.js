@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import PianoKey from "./components/key"
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -22,6 +24,15 @@ class App extends Component {
   render() {
     //
     const keys = ["A", "B", "C", "D", "E", "F", "G"];
+
+    const piano = keys.map(el => {
+return <PianoKey
+key = {el}
+note = {el}
+playKey = {this._playNote}
+endKey = {this._endNote}
+/>
+    })
     const mappedKeys = keys.map((el, index) => {
       return (
         <button
@@ -48,25 +59,29 @@ class App extends Component {
         </button>
         <h2>Mapped Keys</h2>
         {mappedKeys}
-        <h3>Note Played</h3>
-        {this.state.note}
+    
         <h3>Your Song</h3>
         {this.state.song}
+    
+      <h3>Piano</h3>
+      {piano}
       </div>
+
     );
   }
-// TEST BUTTON ONLY
+  // TEST BUTTON ONLY
   _handleClick(key, note) {
     if (key === `down`) this.setState({ note });
     if (key === `up`) this.setState({ note: null });
   }
 
   _playNote(note) {
+    if(this.state.note === null)this.setState({ song: [...this.state.song, `silence`]})
     this.setState({ note });
   }
 
   _endNote(note) {
-    this.setState({ note: null });
+    this.setState({ note: null, song: [...this.state.song, note]});
   }
 }
 
