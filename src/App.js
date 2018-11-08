@@ -30,22 +30,9 @@ return <PianoKey
 key = {el}
 note = {el}
 playKey = {this._playNote}
-endKey = {this._endNote}
+endNote = {this._endNote}
 />
     })
-    const mappedKeys = keys.map((el, index) => {
-      return (
-        <button
-          key={index}
-          className="piano-key"
-          //  onClick={() =>this._handleClick()}
-          onMouseDown={() => this._playNote(el)}
-          onMouseUp={() => this._endNote(el)}
-        >
-          {el}
-        </button>
-      );
-    });
 
     return (
       <div className="App">
@@ -57,8 +44,6 @@ endKey = {this._endNote}
         >
           TestButton
         </button>
-        <h2>Mapped Keys</h2>
-        {mappedKeys}
     
         <h3>Your Song</h3>
         {this.state.song}

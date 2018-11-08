@@ -10,29 +10,24 @@ class PianoKey extends Component {
 
     this.url = `./grand-piano-mp3-sounds/${this.props.note}4.mp3`;
     this.audio = new Audio(this.url);
-    this.togglePlay = this.togglePlay.bind(this);
+    this._togglePlay = this._togglePlay.bind(this);
   }
 
 
   render() {
     return (
       <button className="music-btn" 
-    //   onClick={this.togglePlay}
-      onMouseDown={() => this.props.playKey(this.props.note)}
-      onMouseUp={() => this.props.endKey(this.props.note)}
-      
+      onClick={this._togglePlay}
       >
-        {/* {this.state.play ? "Pause" : "Play" } */}
         {this.props.note}
       </button>
     );
   }
 
-  togglePlay() {
-    this.setState({ play: true})
-    console.log(this.audio);
-    // this.state.play ? this.audio.play() : this.audio.pause();
-    this.audio.play()
+  _togglePlay() {
+    this.audio.play();
+    this.props.endNote(this.props.note);
+    
   }
 }
 
