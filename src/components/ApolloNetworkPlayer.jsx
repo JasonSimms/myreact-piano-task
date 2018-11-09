@@ -21,34 +21,41 @@ class Player extends Component {
 
   render() {
     const client = new ApolloClient({
-      uri: "https://w5xlvm3vzz.lp.gql.zone/graphql"
+      uri: "http://localhost:4000"
     });
+
+    const GET_SONGS = gql`
+    {
+      songs {
+        id
+        title
+        keysPlayed
+    }
+    }
+  `;
+    
 
     return (
       <ApolloProvider client={client}>
         <div>
           <h2>My first Apollo app</h2>
+          <ol>
+
           <Query
-            query={gql`
-              {
-                rates(currency: "USD") {
-                  currency
-                  rate
-                }
-              }
-            `}
-          >
+            query={GET_SONGS}
+            >
             {({ loading, error, data }) => {
               if (loading) return <p>Loading...</p>;
               if (error) return <p>Error :(</p>;
-
-              return data.rates.map(({ currency, rate }) => (
-                <div key={currency}>
-                  <p>{`${currency}: ${rate}`}</p>
-                </div>
-              ));
-            }}
+                console.log(data.songs)
+                return data.songs.map(el=>{
+                  return <li key={el.title}>{el.title}</li>
+                  
+                })
+                // return <p>{data.songs.toString()}</p>
+              }}
           </Query>
+              </ol>
         </div>
       </ApolloProvider>
     );
