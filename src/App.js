@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import PianoKey from "./components/Key";
 import FlatKey from "./components/FlatKey";
+import playback from "./components/playBack";
 
 class App extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class App extends Component {
       error: null,
       note: null,
       song: {},
-      displaySong:[],
+      displaySong: [],
       isPlaying: false,
       isRecording: false,
       time: 0
@@ -21,14 +22,13 @@ class App extends Component {
     this._startRecord = this._startRecord.bind(this);
     this._stopRecord = this._stopRecord.bind(this);
     this._playNote = this._playNote.bind(this);
-    this._drawAnOctave = this._drawAnOctave.bind(this)
+    this._drawAnOctave = this._drawAnOctave.bind(this);
   }
 
   componentDidMount() {
     console.log("Thank you for your interest in my code!");
   }
   render() {
-
     return (
       <div className="App">
         <button className="testbtn" onClick={() => this._startRecord()}>
@@ -38,15 +38,29 @@ class App extends Component {
           Stop Rec
         </button>
         <br />
+        <button
+          className="testbtn"
+          onClick={() => playback(this.currentRecording,"start")}
+        >
+          Start Playback
+        </button>
+        <button
+          className="testbtn"
+          onClick={() => playback(this.currentRecording,"stop")}
+        >
+          Stop Playback
+        </button>
+        <br />
+        <br />
         Timer:{this.state.time}
         <br />
         isRecording:{this.state.isRecording.toString()}
         <h3>Piano</h3>
         <div id="piano">
-        {/* Draw piano octaves programmatically */}
-        {this._drawAnOctave(3)} 
-        {this._drawAnOctave(4)}
-        {/* {this._drawAnOctave(5)} */}
+          {/* Draw piano octaves programmatically */}
+          {this._drawAnOctave(3)}
+          {this._drawAnOctave(4)}
+          {/* {this._drawAnOctave(5)} */}
         </div>
         <h3>Your Song</h3>
         {this.state.displaySong}
@@ -58,8 +72,8 @@ class App extends Component {
 
   //  IN USE Functions
   _startRecord() {
-    this.currentRecording={}
-    this.setState({ time: 0, isRecording: true, displaySong:[] });
+    this.currentRecording = {};
+    this.setState({ time: 0, isRecording: true, displaySong: [] });
     console.log(`Record Started`);
     const increment = 0.2;
     this.timer = setInterval(() => {
@@ -89,8 +103,8 @@ class App extends Component {
     const pianoKeys = keys.map(el => {
       return (
         <PianoKey
-          key={el+octave}
-          note={el+octave}
+          key={el + octave}
+          note={el + octave}
           playNote={this._playNote}
         />
       );
@@ -98,7 +112,11 @@ class App extends Component {
 
     const flatKeys = flats.map(el => {
       return (
-        <FlatKey key={el+octave} note={el+octave} playNote={this._playNote} />
+        <FlatKey
+          key={el + octave}
+          note={el + octave}
+          playNote={this._playNote}
+        />
       );
     });
 
