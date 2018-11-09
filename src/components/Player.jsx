@@ -31,10 +31,10 @@ class Player extends Component {
           <button
             className="song-btn"
             onClick={() => {
-              this._handleClick(el.music,el.length);
+              this._handleClick(el.music,el.duration);
             }}
           >
-            Listen to: {el.title} length: {Math.round(el.length)}s
+            Listen to: {el.title} length: {Math.round(el.duration)}s
           </button>
         </li>
       );

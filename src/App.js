@@ -88,7 +88,7 @@ class App extends Component {
 
   _stopRecord() {
     if (this.state.isRecording) {
-      let thisSong = {title: this.state.title, music: this.currentRecording, length: this._getSongLength(this.currentRecording)};
+      let thisSong = {title: this.state.title, music: this.currentRecording, duration: this._getSongLength(this.currentRecording)};
       console.log(`Finished Song`, thisSong);
       clearInterval(this.timer);
       this.setState({
@@ -141,7 +141,7 @@ class App extends Component {
   _getSongLength(song) {
     const times = Object.keys(song);
     const lastTime = times[times.length - 1];
-    return lastTime;
+    return Number(lastTime);
   }
 
   // Delivers input field to state

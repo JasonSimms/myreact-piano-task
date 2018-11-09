@@ -4,7 +4,14 @@ const songs = [
     {
         id: 1,
         title: 'Some song title',
-        keysPlayed: [ 'C', 'D', 'E'],
+        music: [ 'C', 'D', 'E'],
+        duration: 5
+    },
+    {
+        id: 2,
+        duration: 3.400000000000001,
+        music: {0.8: "Ab4", 1.7999999999999998: "G4", 2.1999999999999997: "F4", 2.6: "E4", 3.0000000000000004: "Eb4"},
+        title: "NoTitle"
     }
 ];
 
@@ -12,7 +19,8 @@ const typeDefs = gql`
     type Song {
         id: ID!
         title: String
-        keysPlayed: [String]
+        music: Object
+        duration: Number
     }
 
     type Query {
@@ -20,7 +28,7 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        addSong(title: String, keysPlayed: [String]): Song
+        addSong(title: String, music: [String]): Song
     }
 `
 
@@ -29,11 +37,12 @@ const resolvers = {
         songs: () => songs,
     },
     Mutation: {
-        addSong: (_, { title, keysPlayed }) => {
+        addSong: (_, { title, music }) => {
             const newSong = { 
                 id: songs.length + 1,
                 title,
-                keysPlayed,
+                music,
+                length,
             };
             songs.push(newSong);
 
