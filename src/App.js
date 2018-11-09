@@ -58,7 +58,8 @@ class App extends Component {
 
   //  IN USE Functions
   _startRecord() {
-    this.setState({ time: 0, isRecording: true });
+    this.currentRecording={}
+    this.setState({ time: 0, isRecording: true, displaySong:[] });
     console.log(`Record Started`);
     const increment = 0.2;
     this.timer = setInterval(() => {
