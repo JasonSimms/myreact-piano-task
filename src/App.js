@@ -4,6 +4,7 @@ import PianoKey from "./components/Key";
 import FlatKey from "./components/FlatKey";
 import TitleDisplay from "./components/TitleDisplay";
 import Player from "./components/Player";
+import ApolloPlayer from "./components/ApolloNetworkPlayer"
 
 class App extends Component {
   constructor(props) {
@@ -36,6 +37,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+      <ApolloPlayer/>
         <button className="testbtn" onClick={() => this._startRecord()}>
           Start Rec
         </button>
