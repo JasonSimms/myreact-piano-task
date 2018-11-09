@@ -13,21 +13,18 @@ class PianoKey extends Component {
     this._togglePlay = this._togglePlay.bind(this);
   }
 
-
   render() {
     return (
-      <button className="music-btn" 
-      onClick={this._togglePlay}
-      >
+      <button className="music-btn" onClick={this._togglePlay}>
         {this.props.note}
       </button>
     );
   }
 
   _togglePlay() {
+    this.audio.currentTime = 0;
     this.audio.play();
     this.props.endNote(this.props.note);
-    
   }
 }
 
