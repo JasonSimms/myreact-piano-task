@@ -9,18 +9,16 @@ class App extends Component {
     this.state = {
       error: null,
       note: null,
-      song: [],
+      song: {},
       isPlaying: false,
       isRecording: false,
       time: 0
     };
-
+    this.currentRecording = {};
     this.timer = null;
     this._startRecord = this._startRecord.bind(this);
     this._stopRecord = this._stopRecord.bind(this);
-    this._handleClick = this._handleClick.bind(this);
     this._playNote = this._playNote.bind(this);
-    this._endNote = this._endNote.bind(this);
   }
 
   componentDidMount() {
@@ -31,14 +29,7 @@ class App extends Component {
     const keys = ["A", "B", "C", "D", "E", "F", "G"];
 
     const piano = keys.map(el => {
-      return (
-        <PianoKey
-          key={el}
-          note={el}
-          playKey={this._playNote}
-          endNote={this._endNote}
-        />
-      );
+      return <PianoKey key={el} note={el} playNote={this._playNote} />;
     });
 
     return (
@@ -56,41 +47,36 @@ class App extends Component {
         <h3>Piano</h3>
         {piano}
         <h3>Your Song</h3>
-        {this.state.song}
+        {this.state.song.toString()}
       </div>
     );
   }
 
   // SandBox Functions
-  _handleClick(key, note) {
-    if (key === `down`) this.setState({ note });
-    if (key === `up`) this.setState({ note: null });
-  }
 
+  //  IN USE Functions
   _startRecord() {
-    this.setState({time:0})
+    this.setState({ time: 0, isRecording: true });
     console.log(`Record Started`);
-    const increment = 0.5;
+    const increment = 0.2;
     this.timer = setInterval(() => {
       this.setState(prevState => ({ time: prevState.time + increment }));
     }, increment * 1000);
   }
 
   _stopRecord() {
-    console.log(this.state.time);
+    console.log(`Finished Song`, this.currentRecording);
     clearInterval(this.timer);
+    this.setState({
+      timer: 0,
+      isRecording: false,
+      song: this.currentRecording
+    });
   }
-  //  IN USE Functions
   _playNote(note) {
-    if (this.state.note === null)
-      this.setState({ song: [...this.state.song, `silence`] });
-    this.setState({ note });
-  }
-
-  _endNote(note) {
-    this.setState({ note: null, song: [...this.state.song, note] });
+    console.log(note);
+    if (this.state.isRecording) this.currentRecording[this.state.time] = note;
   }
 }
 
 export default App;
-

@@ -8,7 +8,7 @@ class PianoKey extends Component {
       play: false
     };
 
-    this.url = `./grand-piano-mp3-sounds/${this.props.note}4.mp3`;
+    this.url = `./grand-piano-mp3-sounds/${this.props.note}3.mp3`;
     this.audio = new Audio(this.url);
     this._togglePlay = this._togglePlay.bind(this);
   }
@@ -24,7 +24,7 @@ class PianoKey extends Component {
   _togglePlay() {
     this.audio.currentTime = 0;
     this.audio.play();
-    this.props.endNote(this.props.note);
+    this.props.playNote(this.props.note);
   }
 }
 
