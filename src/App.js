@@ -2,7 +2,8 @@ import React, { Component } from "react";
 
 import PianoKey from "./components/Key";
 import FlatKey from "./components/FlatKey";
-import playback from "./components/playBack";
+import TitleDisplay from "./components/TitleDisplay";
+import Player from "./components/Player";
 
 class App extends Component {
   constructor(props) {
@@ -11,11 +12,12 @@ class App extends Component {
     this.state = {
       error: null,
       note: null,
-      song: {},
+      song: [],
       displaySong: [],
-      isPlaying: false,
       isRecording: false,
-      time: 0
+      time: 0,
+      title: "NoTitle",
+      library: []
     };
     this.currentRecording = {};
     this.timer = null;
@@ -23,6 +25,7 @@ class App extends Component {
     this._stopRecord = this._stopRecord.bind(this);
     this._playNote = this._playNote.bind(this);
     this._drawAnOctave = this._drawAnOctave.bind(this);
+    this._handleInputChange = this._handleInputChange.bind(this);
   }
 
   componentDidMount() {
@@ -38,23 +41,17 @@ class App extends Component {
           Stop Rec
         </button>
         <br />
-        <button
-          className="testbtn"
-          onClick={() => playback(this.currentRecording,"start")}
-        >
-          Start Playback
-        </button>
-        <button
-          className="testbtn"
-          onClick={() => playback(this.currentRecording,"stop")}
-        >
-          Stop Playback
-        </button>
         <br />
+        <Player
+          song={this.state.song}
+          title={this.state.title}
+          library={this.state.library}
+        />
         <br />
-        Timer:{this.state.time}
-        <br />
-        isRecording:{this.state.isRecording.toString()}
+        <TitleDisplay
+          target={this.state.title}
+          handleInputChange={this._handleInputChange}
+        />
         <h3>Piano</h3>
         <div id="piano">
           {/* Draw piano octaves programmatically */}
@@ -72,27 +69,34 @@ class App extends Component {
 
   //  IN USE Functions
   _startRecord() {
-    this.currentRecording = {};
-    this.setState({ time: 0, isRecording: true, displaySong: [] });
-    console.log(`Record Started`);
-    const increment = 0.2;
-    this.timer = setInterval(() => {
-      this.setState(prevState => ({ time: prevState.time + increment }));
-    }, increment * 1000);
+    if (!this.state.isRecording) {
+      this.currentRecording = {};
+      this.setState({ time: 0, isRecording: true, displaySong: [] });
+      console.log(`Record Started`);
+      const increment = 0.2;
+      this.timer = setInterval(() => {
+        this.setState(prevState => ({ time: prevState.time + increment }));
+      }, increment * 1000);
+    }
   }
 
   _stopRecord() {
-    console.log(`Finished Song`, this.currentRecording);
-    clearInterval(this.timer);
-    this.setState({
-      timer: 0,
-      isRecording: false,
-      song: this.currentRecording,
-      displaySong: Object.values(this.currentRecording)
-    });
+    if (this.state.isRecording) {
+      let thisSong = [this.state.title, this.currentRecording];
+      console.log(`Finished Song`, thisSong);
+      clearInterval(this.timer);
+      this.setState({
+        timer: 0,
+        isRecording: false,
+        song: thisSong,
+        displaySong: Object.values(this.currentRecording),
+        library: [...this.state.library, thisSong]
+      });
+    }
   }
+
   _playNote(note) {
-    console.log(note);
+    // console.log(note);
     if (this.state.isRecording) this.currentRecording[this.state.time] = note;
   }
 
@@ -126,6 +130,13 @@ class App extends Component {
         <div className="flats">{flatKeys}</div>
       </div>
     );
+  }
+
+  // Delivers input field to state
+  _handleInputChange(key, newValue) {
+    this.setState({
+      [key]: newValue
+    });
   }
 }
 

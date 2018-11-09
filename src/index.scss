@@ -20,6 +20,7 @@ body {
   background-image: -webkit-linear-gradient(to top, #799f0c, #acbb78); /* Chrome 10-25, Safari 5.1-6 */
   background-image: linear-gradient(to top, #799f0c, #acbb78); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   height: 100vh;
+  font-size: 1rem;
 }
 
 code {
@@ -63,11 +64,14 @@ background-color:ivory;
 
 .flat-key{
   margin-right: $keyWidth*0.4;
+  padding: 0 ;
   color:white;
   background-color:rgb(32, 32, 32);
   width:$flatWidth;
   height:$flatHeight;
   border: $keyborder grey solid;
+  font-size:0.6em;
+
 
 }
 
