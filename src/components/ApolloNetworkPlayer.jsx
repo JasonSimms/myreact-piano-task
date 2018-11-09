@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import playSong from "./playSong";
 
-import { render } from "react-dom";
+// import { render } from "react-dom";
 import ApolloClient from "apollo-boost";
 import gql from "graphql-tag";
 import { ApolloProvider, Query } from "react-apollo";
