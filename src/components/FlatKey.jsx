@@ -8,12 +8,20 @@ class PianoKey extends Component {
       play: false
     };
 
-    this.url = `./grand-piano-mp3-sounds/${this.props.note}3.mp3`;
+    this.url = `./grand-piano-mp3-sounds/${this.props.note}.mp3`;
     this.audio = new Audio(this.url);
     this._togglePlay = this._togglePlay.bind(this);
   }
 
   render() {
+    if (this.props.note.includes("X")) {
+      return (
+        <button className="flat-key-hidden" onClick={this._togglePlay}>
+          {this.props.note}
+        </button>
+      );
+    }
+
     return (
       <button className="flat-key" onClick={this._togglePlay}>
         {this.props.note}

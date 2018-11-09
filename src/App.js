@@ -11,6 +11,7 @@ class App extends Component {
       error: null,
       note: null,
       song: {},
+      displaySong:[],
       isPlaying: false,
       isRecording: false,
       time: 0
@@ -20,27 +21,13 @@ class App extends Component {
     this._startRecord = this._startRecord.bind(this);
     this._stopRecord = this._stopRecord.bind(this);
     this._playNote = this._playNote.bind(this);
+    this._drawAnOctave = this._drawAnOctave.bind(this)
   }
 
   componentDidMount() {
     console.log("Thank you for your interest in my code!");
   }
   render() {
-    //
-    const keys = ["C", "D", "E", "F", "G", "A", "B"];
-    const flats = ["Cb","Db", "Eb", "Fb", "Gb", "Ab", "Bb"];
-
-    const pianoKeys = keys.map(el => {
-      return (
-        <PianoKey key={el} note={el} octave="4" playNote={this._playNote} />
-      );
-    });
-
-    const flatKeys = flats.map(el => {
-      return (
-        <FlatKey key={el} note={el} octave="4" playNote={this._playNote} />
-      );
-    });
 
     return (
       <div className="App">
@@ -55,15 +42,14 @@ class App extends Component {
         <br />
         isRecording:{this.state.isRecording.toString()}
         <h3>Piano</h3>
-        <h3>Your Song</h3>
-        {this.state.song.toString()}
         <div id="piano">
-          <div className="octave">
-            {pianoKeys}
-            <div className="flats">{flatKeys}</div>
-          </div>
-          Here is the piano!
+        {/* Draw piano octaves programmatically */}
+        {this._drawAnOctave(3)} 
+        {this._drawAnOctave(4)}
+        {/* {this._drawAnOctave(5)} */}
         </div>
+        <h3>Your Song</h3>
+        {this.state.displaySong}
       </div>
     );
   }
@@ -86,12 +72,41 @@ class App extends Component {
     this.setState({
       timer: 0,
       isRecording: false,
-      song: this.currentRecording
+      song: this.currentRecording,
+      displaySong: Object.values(this.currentRecording)
     });
   }
   _playNote(note) {
     console.log(note);
     if (this.state.isRecording) this.currentRecording[this.state.time] = note;
+  }
+
+  _drawAnOctave(octave) {
+    const keys = ["C", "D", "E", "F", "G", "A", "B"];
+    const flats = ["X", "Db", "Eb", "X2", "Gb", "Ab", "Bb"];
+
+    const pianoKeys = keys.map(el => {
+      return (
+        <PianoKey
+          key={el+octave}
+          note={el+octave}
+          playNote={this._playNote}
+        />
+      );
+    });
+
+    const flatKeys = flats.map(el => {
+      return (
+        <FlatKey key={el+octave} note={el+octave} playNote={this._playNote} />
+      );
+    });
+
+    return (
+      <div className="octave">
+        <div className="whiteKeys">{pianoKeys}</div>
+        <div className="flats">{flatKeys}</div>
+      </div>
+    );
   }
 }
 

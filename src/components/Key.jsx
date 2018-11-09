@@ -8,7 +8,7 @@ class PianoKey extends Component {
       play: false
     };
 
-    this.url = `./grand-piano-mp3-sounds/${this.props.note}${this.props.octave}.mp3`;
+    this.url = `./grand-piano-mp3-sounds/${this.props.note}.mp3`;
     this.audio = new Audio(this.url);
     this._togglePlay = this._togglePlay.bind(this);
   }
