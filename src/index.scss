@@ -13,7 +13,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: $blueColor;
+  // background: $blueColor;
+  background: #799f0c; /* fallback for old browsers */
+  background-image: -webkit-linear-gradient(to top, #799f0c, #acbb78); /* Chrome 10-25, Safari 5.1-6 */
+  background-image: linear-gradient(to top, #799f0c, #acbb78); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  height: 100vh;
 }
 
 code {
@@ -22,7 +26,6 @@ code {
 }
 
 #piano{
-background-color: pink;
 height: 300px;
 width: auto;
 // position: relative;
