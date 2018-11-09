@@ -26,6 +26,8 @@ class App extends Component {
     this._playNote = this._playNote.bind(this);
     this._drawAnOctave = this._drawAnOctave.bind(this);
     this._handleInputChange = this._handleInputChange.bind(this);
+    this._getSongLength = this._getSongLength.bind(this);
+
   }
 
   componentDidMount() {
@@ -82,7 +84,7 @@ class App extends Component {
 
   _stopRecord() {
     if (this.state.isRecording) {
-      let thisSong = [this.state.title, this.currentRecording];
+      let thisSong = [this.state.title, this.currentRecording, this._getSongLength(this.currentRecording)];
       console.log(`Finished Song`, thisSong);
       clearInterval(this.timer);
       this.setState({
@@ -130,6 +132,12 @@ class App extends Component {
         <div className="flats">{flatKeys}</div>
       </div>
     );
+  }
+
+  _getSongLength(song) {
+    const times = Object.keys(song);
+    const lastTime = times[times.length - 1];
+    return lastTime;
   }
 
   // Delivers input field to state

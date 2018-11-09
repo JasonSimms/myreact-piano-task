@@ -12,7 +12,6 @@ class Player extends Component {
     };
 
     this._handleClick = this._handleClick.bind(this);
-    this._getSongLength = this._getSongLength.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -28,14 +27,14 @@ class Player extends Component {
     let myLibrary = this.props.library;
     let mappedSongs = myLibrary.map(el => {
       return (
-        <li>
+        <li key={el}>
           <button
-            className="testbtn"
+            className="song-btn"
             onClick={() => {
-              this._handleClick(el[1]);
+              this._handleClick(el[1],el[2]);
             }}
           >
-            Listen to: {el[0]}
+            Listen to: {el[0]} length: {Math.round(el[2])}s
           </button>
         </li>
       );
@@ -53,18 +52,15 @@ class Player extends Component {
     );
   }
 
-  _handleClick(key) {
+  _handleClick(key,time) {
+    console.log(time)
     if (!this.state.isPlaying) {
-      this.setState({ isPlaying: true, songLength: this._getSongLength(key) });
+      this.setState({ isPlaying: true, songLength: time});
       playSong(key);
     }
   }
 
-  _getSongLength(song) {
-    const times = Object.keys(song);
-    const lastTime = times[times.length - 1];
-    return lastTime;
-  }
+
 }
 
 export default Player;
