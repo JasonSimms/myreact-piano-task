@@ -13,7 +13,7 @@ const playback = (song) => {
     times.forEach(function(time) {
       setTimeout(function() {
         lastPlayed = time;
-        console.log("foobar");
+        console.log(notes[0]);
         let audio = new Audio(`./grand-piano-mp3-sounds/${notes[0]}.mp3`);
         audio.currentTime = 0;
         audio.play();
