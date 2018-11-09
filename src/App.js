@@ -33,6 +33,8 @@ class App extends Component {
 
   componentDidMount() {
     console.log("Thank you for your interest in my code!");
+    console.log("Heroku Deploy 0.1");
+
   }
   render() {
     return (
