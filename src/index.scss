@@ -1,4 +1,9 @@
 $blueColor: #2196F3;
+$keyborder: 1px;
+$keyWidth: 48px;
+$keyHeight: 300px;
+$flatWidth: ($keyWidth+$keyborder)*0.6;
+$flatHeight: 100px;
 
 body {
   margin: 0;
@@ -14,4 +19,39 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+#piano{
+background-color: pink;
+height: 300px;
+width: 800px;
+// position: relative;
+}
+
+.key{
+  width:$keyWidth;
+  height:$keyHeight;
+  border: $keyborder grey solid;
+}
+
+.flat-key{
+  margin-right: $keyWidth*0.4;
+  color:white;
+  background-color:black;
+  width:$flatWidth;
+  height:$flatHeight;
+  z-index: 1;
+  border: $keyborder grey solid;
+
+}
+
+.octave{
+  background-color:red;
+  position:relative;
+}
+
+.flats{
+  position: absolute;
+  top:0;
+  left: -($flatWidth+$keyborder)*0.5;
 }

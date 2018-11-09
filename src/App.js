@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import PianoKey from "./components/Key";
+import FlatKey from "./components/FlatKey";
 
 class App extends Component {
   constructor(props) {
@@ -26,10 +27,19 @@ class App extends Component {
   }
   render() {
     //
-    const keys = ["A", "B", "C", "D", "E", "F", "G"];
+    const keys = ["C", "D", "E", "F", "G", "A", "B"];
+    const flats = ["Cb","Db", "Eb", "Fb", "Gb", "Ab", "Bb"];
 
-    const piano = keys.map(el => {
-      return <PianoKey key={el} note={el} playNote={this._playNote} />;
+    const pianoKeys = keys.map(el => {
+      return (
+        <PianoKey key={el} note={el} octave="4" playNote={this._playNote} />
+      );
+    });
+
+    const flatKeys = flats.map(el => {
+      return (
+        <FlatKey key={el} note={el} octave="4" playNote={this._playNote} />
+      );
     });
 
     return (
@@ -45,9 +55,15 @@ class App extends Component {
         <br />
         isRecording:{this.state.isRecording.toString()}
         <h3>Piano</h3>
-        {piano}
         <h3>Your Song</h3>
         {this.state.song.toString()}
+        <div id="piano">
+          <div className="octave">
+            {pianoKeys}
+            <div className="flats">{flatKeys}</div>
+          </div>
+          Here is the piano!
+        </div>
       </div>
     );
   }
