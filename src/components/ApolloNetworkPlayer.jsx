@@ -38,7 +38,8 @@ class Player extends Component {
         songs {
           id
           title
-          music
+          keysPlayed
+          keysTimeStamps
           duration
         }
       }
@@ -60,17 +61,14 @@ class Player extends Component {
                       <button
                         className="song-btn"
                         onClick={() => {
-                          this._handleClick(el.music, el.duration);
+                          this._handleClick(el.keysPlayed,el.keysTimeStamps,el.duration);
                         }}
                       >
                         Listen to: {el.title} length: {Math.round(el.duration)}s
                       </button>
                     </li>
                   );
-
-                  // <li key={el.title}>{el.title}</li>
                 });
-                // return <p>{data.songs.toString()}</p>
               }}
             </Query>
           </ol>
@@ -79,11 +77,12 @@ class Player extends Component {
     );
   }
 
-  _handleClick(music, time) {
-    console.log(time,music);
+  _handleClick(notes,times, duration) {
+    console.log(`Notes: `,notes,`times:`,times,duration)
+
     if (!this.state.isPlaying) {
-      this.setState({ isPlaying: true, songLength: time });
-      playSong(music);
+      this.setState({ isPlaying: true, songLength: duration });
+      playSong(notes,times);
     }
   }
 }

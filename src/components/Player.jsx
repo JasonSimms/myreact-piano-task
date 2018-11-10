@@ -31,7 +31,7 @@ class Player extends Component {
           <button
             className="song-btn"
             onClick={() => {
-              this._handleClick(el.music,el.duration);
+              this._handleClick(el.keysPlayed,el.keysTimeStamps,el.duration);
             }}
           >
             Listen to: {el.title} length: {Math.round(el.duration)}s
@@ -52,11 +52,11 @@ class Player extends Component {
     );
   }
 
-  _handleClick(key,time) {
-    console.log(time)
+  _handleClick(notes,times,duration) {
+    console.log(notes,times,duration)
     if (!this.state.isPlaying) {
-      this.setState({ isPlaying: true, songLength: time});
-      playSong(key);
+      this.setState({ isPlaying: true, songLength: duration});
+      playSong(notes,times);
     }
   }
 
