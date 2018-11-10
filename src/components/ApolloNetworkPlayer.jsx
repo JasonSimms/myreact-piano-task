@@ -46,7 +46,7 @@ class Player extends Component {
 
     return (
       <ApolloProvider client={client}>
-        <div>
+        <div className="apollo-container">
           <h2>Enjoy Database Library Songs:</h2>
           <ol>
             <Query 
@@ -54,7 +54,7 @@ class Player extends Component {
             pollInterval={500}>
               {({ loading, error, data, startPolling, stopPolling }) => {
                 if (loading) return <p>Loading...</p>;
-                if (error) return <p>Error :(</p>;
+                if (error) return <p>Apollo Server Not Running..cd Apollo-server/README for instructions...</p>;
                 console.log(data.songs[1]);
                 return data.songs.map(el => {
                   return (

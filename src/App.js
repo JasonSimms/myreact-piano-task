@@ -17,7 +17,18 @@ class App extends Component {
       isRecording: false,
       time: 0,
       title: "Hello_World!",
-      library: []
+      library: [],
+      showOctave0: false,
+      showOctave1: false,
+      showOctave2: true,
+      showOctave3: true,
+      showOctave4: false,
+      showOctave5: false,
+      showOctave6: true,
+      showOctave7: true,
+
+
+
     };
     this.currentRecording = {};
     this.timer = null;
@@ -27,7 +38,7 @@ class App extends Component {
     this._drawAnOctave = this._drawAnOctave.bind(this);
     this._handleInputChange = this._handleInputChange.bind(this);
     this._getSongLength = this._getSongLength.bind(this);
-
+    this._drawPiano = this._drawPiano.bind(this)
   }
 
   componentDidMount() {
@@ -42,11 +53,15 @@ class App extends Component {
           library={this.state.library}
         />
 
-        {!this.state.isRecording ? <button className="testbtn" onClick={() => this._startRecord()}>
-          Record
-        </button> : <button className="testbtn" onClick={() => this._stopRecord()}>
-          Stop Recording
-        </button>  }
+        {!this.state.isRecording ? (
+          <button className="testbtn" onClick={() => this._startRecord()}>
+            Record
+          </button>
+        ) : (
+          <button className="testbtn" onClick={() => this._stopRecord()}>
+            Stop Recording
+          </button>
+        )}
         <br />
         <br />
         <br />
@@ -56,9 +71,16 @@ class App extends Component {
         />
         <h3>Piano</h3>
         <div id="piano">
-          {/* Draw piano octaves programmatically */}
-          {this._drawAnOctave(3)}
-          {this._drawAnOctave(4)}
+        {/* Draw piano octaves programmatically */}
+          {this.state.showOctave0 ? this._drawAnOctave(0) : null}
+          {this.state.showOctave1 ? this._drawAnOctave(1) : null}
+          {this.state.showOctave2 ? this._drawAnOctave(2) : null}
+          {this.state.showOctave3 ? this._drawAnOctave(3) : null}
+          {this.state.showOctave4 ? this._drawAnOctave(4) : null}
+          {this.state.showOctave5 ? this._drawAnOctave(5) : null}
+          {this.state.showOctave6 ? this._drawAnOctave(6) : null}
+          {this.state.showOctave7 ? this._drawAnOctave(7) : null}
+
           {/* {this._drawAnOctave(5)} */}
         </div>
         <h3>Your Song</h3>
@@ -84,7 +106,12 @@ class App extends Component {
 
   _stopRecord() {
     if (this.state.isRecording) {
-      let thisSong = {title: this.state.title, keysPlayed: Object.values(this.currentRecording), keysTimeStamps: Object.keys(this.currentRecording), duration: this._getSongLength(this.currentRecording)};
+      let thisSong = {
+        title: this.state.title,
+        keysPlayed: Object.values(this.currentRecording),
+        keysTimeStamps: Object.keys(this.currentRecording),
+        duration: this._getSongLength(this.currentRecording)
+      };
       console.log(`Finished Song`, thisSong);
       clearInterval(this.timer);
       this.setState({
@@ -93,7 +120,7 @@ class App extends Component {
         song: thisSong,
         displaySong: Object.values(this.currentRecording),
         library: [...this.state.library, thisSong],
-        title: 'mySong'
+        title: "mySong"
       });
     }
   }
@@ -146,6 +173,11 @@ class App extends Component {
     this.setState({
       [key]: newValue
     });
+  }
+
+  _drawPiano() {
+    
+    return    this._drawAnOctave(3)
   }
 }
 
