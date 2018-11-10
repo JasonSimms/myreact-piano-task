@@ -4,7 +4,6 @@ import PianoKey from "./components/Key";
 import FlatKey from "./components/FlatKey";
 import TitleDisplay from "./components/TitleDisplay";
 import Player from "./components/Player";
-import ApolloPlayer from "./components/ApolloNetworkPlayer"
 
 class App extends Component {
   constructor(props) {
@@ -17,7 +16,7 @@ class App extends Component {
       displaySong: [],
       isRecording: false,
       time: 0,
-      title: "NoTitle",
+      title: "Hello_World!",
       library: []
     };
     this.currentRecording = {};
@@ -33,26 +32,23 @@ class App extends Component {
 
   componentDidMount() {
     console.log("Thank you for your interest in my code!");
-    console.log("Heroku Deploy 0.1");
-
   }
   render() {
     return (
       <div className="App">
-      {/* <ApolloPlayer/> */}
-        <button className="testbtn" onClick={() => this._startRecord()}>
-          Start Rec
-        </button>
-        <button className="testbtn" onClick={() => this._stopRecord()}>
-          Stop Rec
-        </button>
-        <br />
-        <br />
         <Player
           song={this.state.song}
           title={this.state.title}
           library={this.state.library}
         />
+
+        {!this.state.isRecording ? <button className="testbtn" onClick={() => this._startRecord()}>
+          Record
+        </button> : <button className="testbtn" onClick={() => this._stopRecord()}>
+          Stop Recording
+        </button>  }
+        <br />
+        <br />
         <br />
         <TitleDisplay
           target={this.state.title}
@@ -96,7 +92,8 @@ class App extends Component {
         isRecording: false,
         song: thisSong,
         displaySong: Object.values(this.currentRecording),
-        library: [...this.state.library, thisSong]
+        library: [...this.state.library, thisSong],
+        title: 'mySong'
       });
     }
   }

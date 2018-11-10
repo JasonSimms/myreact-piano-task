@@ -56,7 +56,7 @@ class Player extends Component {
                 console.log(data.songs[1]);
                 return data.songs.map(el => {
                   return (
-                    <li key={el.title}>
+                    <li key={el.id}>
                       <button
                         className="song-btn"
                         onClick={() => {

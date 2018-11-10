@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import playSong from "./playSong";
 
+import ApolloClient from "apollo-boost";
+import gql from "graphql-tag";
+import { Mutation, ApolloProvider } from "react-apollo";
+import NewSong from "./NewSong";
+
 class Player extends Component {
   constructor(props) {
     super(props);
@@ -8,58 +13,62 @@ class Player extends Component {
     this.state = {
       error: null,
       isPlaying: false,
-      songLength: 0
+      songLength: 0,
+      toPostSong: null
     };
 
     this._handleClick = this._handleClick.bind(this);
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate() {
+    // Stops multiple songs from playing at once.
     if (this.state.isPlaying) {
-      // when the state is updated (turned red),
-      // a timeout is triggered to switch it back off
       this.resetPlayerTimeout = setTimeout(() => {
         this.setState(() => ({ isPlaying: false }));
-      }, this.state.songLength*1000);
+      }, this.state.songLength * 1000);
     }
   }
   render() {
+    const client = new ApolloClient({
+      uri: "http://localhost:4000"
+    });
+
+
+
+
     let myLibrary = this.props.library;
-    let mappedSongs = myLibrary.map(el => {
+    let mappedSongs = myLibrary.map((el,index) => {
       return (
-        <li key={el}>
-          <button
-            className="song-btn"
-            onClick={() => {
-              this._handleClick(el.keysPlayed,el.keysTimeStamps,el.duration);
-            }}
-          >
-            Listen to: {el.title} length: {Math.round(el.duration)}s
-          </button>
-        </li>
+      <NewSong
+song = {el}
+index = {index}
+handleClick = {this._handleClick}
+      />
       );
     });
 
     return (
       <div>
         <h3>Playing: {this.props.song.title}</h3>
+        <h1>Song to post {this.songToPost}</h1>
         <br />
         {this.state.isPlaying.toString()}
         {this.state.songLength}
+        <ApolloProvider client={client}>
         <ul>{mappedSongs}</ul>
+        </ApolloProvider>
         <br />
       </div>
     );
   }
 
-  _handleClick(notes,times,duration) {
-    console.log(notes,times,duration)
+  _handleClick(notes, times, duration) {
+    console.log(notes, times, duration);
     if (!this.state.isPlaying) {
-      this.setState({ isPlaying: true, songLength: duration});
-      playSong(notes,times);
+      this.setState({ isPlaying: true, songLength: duration });
+      playSong(notes, times);
     }
   }
-
 
 }
 

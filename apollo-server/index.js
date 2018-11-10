@@ -32,7 +32,7 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        addSong(title: String, keysPlayed: [String], keysTimeStamps: [String], duration: Int): Song
+        addSong(title: String, keysPlayed: [String], keysTimeStamps: [Float], duration: Int): Song
     }
 `
 

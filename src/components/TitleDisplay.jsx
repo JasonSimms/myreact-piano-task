@@ -4,8 +4,8 @@ class Email extends Component {
   render() {
     return (
       <div className="input-form">
-        <p className="input-title">
-          Next Song Title:
+        <h4 className="input-title">
+          What Should Your Next Song Be Called?:
           <input
             type="string"
             value={this.props.target}
@@ -13,12 +13,9 @@ class Email extends Component {
               this.props.handleInputChange("title", evt.target.value)
             }
             className="title-input"
-            //   placeholder="Untitled"
             autoFocus={true}
           />
-        </p>
-        <br />
-        <br />
+        </h4>
       </div>
     );
   }
