@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import playSong from "./playSong";
 
 import ApolloClient from "apollo-boost";
-import gql from "graphql-tag";
-import { Mutation, ApolloProvider } from "react-apollo";
+import {  ApolloProvider } from "react-apollo";
 import NewSong from "./NewSong";
 
 class Player extends Component {

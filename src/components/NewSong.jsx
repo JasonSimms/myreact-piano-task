@@ -36,58 +36,55 @@ class NewSong extends Component {
       }
     `;
 
-    const AddSong = () => {
-      let input;
-      // this.btn.setAttribute("disabled", "disabled");
-    };
-
     return (
       <li key={this.props.song + this.props.index}>
-        <button
-          className="song-btn"
-          onClick={() => {
-            this._handleClick(
-              this.props.song.keysPlayed,
-              this.props.song.keysTimeStamps,
-              this.props.song.duration
-            );
-          }}
-        >
-          Listen to: {this.props.song.title} length:{" "}
-          {Math.round(this.props.song.duration)}s
-        </button>
-        {!this.state.isHidden ? 
-        <Mutation mutation={ADD_SONG}>
-          {(addSong, { data }) => (
-              <button
-              ref={btn => {
-                  this.btn = btn;
-                }}
-                onClick={e => {
+        {!this.state.isHidden ? (
+          <div>
+            <button
+              className="song-btn"
+              onClick={() => {
+                this.props.handleClick(
+                  this.props.song.keysPlayed,
+                  this.props.song.keysTimeStamps,
+                  this.props.song.duration
+                );
+              }}
+            >
+              Listen to: {this.props.song.title} length:{" "}
+              {Math.round(this.props.song.duration)}s
+            </button>
+            <Mutation mutation={ADD_SONG}>
+              {(addSong, { data }) => (
+                <button
+                  ref={btn => {
+                    this.btn = btn;
+                  }}
+                  onClick={e => {
                     e.preventDefault();
                     addSong({
-                        variables: {
-                            title: this.props.song.title,
-                            duration: this.props.song.duration,
-                            keysPlayed: this.props.song.keysPlayed,
-                            keysTimeStamps: this.props.song.keysTimeStamps
-                        }
+                      variables: {
+                        title: this.props.song.title,
+                        duration: this.props.song.duration,
+                        keysPlayed: this.props.song.keysPlayed,
+                        keysTimeStamps: this.props.song.keysTimeStamps
+                      }
                     });
-                    this._disableBtn(this.props.song.title);
-                }}
+                    this._disableBtn();
+                  }}
                 >
-              Post Song
-            </button>
-          )}
-        </Mutation> 
-        : <p>uploaded!</p>
-        }
+                  Post this Song!
+                </button>
+              )}
+            </Mutation>
+          </div>
+        ) : (
+          <p>{this.props.song.title} uploaded!</p>
+        )}
       </li>
     );
   }
 
-  _disableBtn(name) {
-    console.log(`disabled`, name);
+  _disableBtn() {
     this.setState({ isHidden: true });
   }
 }
