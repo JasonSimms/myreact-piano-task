@@ -5,6 +5,8 @@ import FlatKey from "./components/FlatKey";
 import TitleDisplay from "./components/TitleDisplay";
 import Player from "./components/Player";
 
+
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -20,15 +22,12 @@ class App extends Component {
       library: [],
       showOctave0: false,
       showOctave1: false,
-      showOctave2: true,
-      showOctave3: true,
-      showOctave4: false,
-      showOctave5: false,
+      showOctave2: false,
+      showOctave3: false,
+      showOctave4: true,
+      showOctave5: true,
       showOctave6: true,
-      showOctave7: true,
-
-
-
+      showOctave7: false
     };
     this.currentRecording = {};
     this.timer = null;
@@ -38,7 +37,7 @@ class App extends Component {
     this._drawAnOctave = this._drawAnOctave.bind(this);
     this._handleInputChange = this._handleInputChange.bind(this);
     this._getSongLength = this._getSongLength.bind(this);
-    this._drawPiano = this._drawPiano.bind(this)
+    this._drawPiano = this._drawPiano.bind(this);
   }
 
   componentDidMount() {
@@ -47,10 +46,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Player
-          song={this.state.song}
-          title={this.state.title}
-          library={this.state.library}
+        
+        <TitleDisplay
+          target={this.state.title}
+          handleInputChange={this._handleInputChange}
         />
 
         {!this.state.isRecording ? (
@@ -63,15 +62,8 @@ class App extends Component {
           </button>
         )}
         <br />
-        <br />
-        <br />
-        <TitleDisplay
-          target={this.state.title}
-          handleInputChange={this._handleInputChange}
-        />
-        <h3>Piano</h3>
         <div id="piano">
-        {/* Draw piano octaves programmatically */}
+          {/* Draw piano octaves programmatically */}
           {this.state.showOctave0 ? this._drawAnOctave(0) : null}
           {this.state.showOctave1 ? this._drawAnOctave(1) : null}
           {this.state.showOctave2 ? this._drawAnOctave(2) : null}
@@ -83,6 +75,11 @@ class App extends Component {
 
           {/* {this._drawAnOctave(5)} */}
         </div>
+        <Player
+          song={this.state.song}
+          title={this.state.title}
+          library={this.state.library}
+        />
         <h3>Your Song</h3>
         {this.state.displaySong}
       </div>
@@ -176,8 +173,7 @@ class App extends Component {
   }
 
   _drawPiano() {
-    
-    return    this._drawAnOctave(3)
+    return this._drawAnOctave(3);
   }
 }
 

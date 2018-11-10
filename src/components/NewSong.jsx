@@ -37,7 +37,7 @@ class NewSong extends Component {
     `;
 
     return (
-      <li key={this.props.song + this.props.index}>
+      <div key={this.props.song + this.props.index}>
         {!this.state.isHidden ? (
           <div>
             <button
@@ -80,7 +80,7 @@ class NewSong extends Component {
         ) : (
           <p>{this.props.song.title} uploaded!</p>
         )}
-      </li>
+      </div>
     );
   }
 

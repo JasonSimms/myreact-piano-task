@@ -35,7 +35,7 @@ class Player extends Component {
     let myLibrary = this.props.library;
     let mappedSongs = myLibrary.map((el, index) => {
       return (
-        <NewSong song={el} index={index} handleClick={this._handleClick} />
+        <NewSong className="sidescroll-item" song={el} index={index} handleClick={this._handleClick} />
       );
     });
 
@@ -44,7 +44,7 @@ class Player extends Component {
         <h3>Playing: {this.props.song.title}</h3>
         <br />
         <ApolloProvider client={client}>
-          <ul>{mappedSongs}</ul>
+          <div className="sidescroll-menu">{mappedSongs}</div>
         </ApolloProvider>
         <br />
       </div>

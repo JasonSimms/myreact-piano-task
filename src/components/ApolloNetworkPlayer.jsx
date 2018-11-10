@@ -19,8 +19,8 @@ class Player extends Component {
   }
   componentDidUpdate(prevProps, prevState) {
     if (this.state.isPlaying) {
-      // when the state is updated (turned red),
-      // a timeout is triggered to switch it back off
+      // when the state is updated (isPlaying),
+      // a timeout is triggered to return it to false
       this.resetPlayerTimeout = setTimeout(() => {
         this.setState(() => ({ isPlaying: false }));
       }, this.state.songLength * 1000);
@@ -47,8 +47,8 @@ class Player extends Component {
     return (
       <ApolloProvider client={client}>
         <div className="apollo-container">
-          <h2>Enjoy Database Library Songs:</h2>
-          <ol>
+          <h4>Enjoy Database Library Songs:</h4>
+          <div className="sidescroll-menu">
             <Query 
             query={GET_SONGS}
             pollInterval={500}>
@@ -58,21 +58,20 @@ class Player extends Component {
                 console.log(data.songs[1]);
                 return data.songs.map(el => {
                   return (
-                    <li key={el.id}>
                       <button
-                        className="song-btn"
+                      key={el.id}
+                        className="sidescroll-item"
                         onClick={() => {
                           this._handleClick(el.keysPlayed,el.keysTimeStamps,el.duration);
                         }}
                       >
-                        Listen to: {el.title} length: {Math.round(el.duration)}s
+                        {el.title} ({Math.round(el.duration)}s)
                       </button>
-                    </li>
                   );
                 });
               }}
             </Query>
-          </ol>
+          </div>
         </div>
       </ApolloProvider>
     );
