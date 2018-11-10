@@ -4,6 +4,7 @@ import PianoKey from "./components/Key";
 import FlatKey from "./components/FlatKey";
 import TitleDisplay from "./components/TitleDisplay";
 import Player from "./components/Player";
+import ApolloPlayer from "./components/ApolloNetworkPlayer"
 
 class App extends Component {
   constructor(props) {
@@ -32,10 +33,13 @@ class App extends Component {
 
   componentDidMount() {
     console.log("Thank you for your interest in my code!");
+    console.log("Heroku Deploy 0.1");
+
   }
   render() {
     return (
       <div className="App">
+      {/* <ApolloPlayer/> */}
         <button className="testbtn" onClick={() => this._startRecord()}>
           Start Rec
         </button>
@@ -84,7 +88,7 @@ class App extends Component {
 
   _stopRecord() {
     if (this.state.isRecording) {
-      let thisSong = [this.state.title, this.currentRecording, this._getSongLength(this.currentRecording)];
+      let thisSong = {title: this.state.title, keysPlayed: Object.values(this.currentRecording), keysTimeStamps: Object.keys(this.currentRecording), duration: this._getSongLength(this.currentRecording)};
       console.log(`Finished Song`, thisSong);
       clearInterval(this.timer);
       this.setState({
@@ -137,7 +141,7 @@ class App extends Component {
   _getSongLength(song) {
     const times = Object.keys(song);
     const lastTime = times[times.length - 1];
-    return lastTime;
+    return Number(Math.ceil(lastTime));
   }
 
   // Delivers input field to state

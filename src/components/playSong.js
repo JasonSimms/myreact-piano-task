@@ -1,25 +1,32 @@
-// This controls playback audio of a song object.
-// song = {1: "D3", 1.4: "F3", 1.9999999999999998: "A3"}
+/* This controls playSong audio of a song object.
 
-const playback = (song) => {
+Playsong takes two arrays, notes and timestamps 
+notes: selects the audio file to play
+times: sets a Timeout for timing accuracy.
+
+*/
+
+const playSong = (notes, times) => {
+// Debug:
+console.log(`playSong.js Recieved Notes:`,notes,`times =>`,times)
+
+  // Recursion controls for progressing through the arrays 
+  let lastPlayedTime = 0;
+  let nextNotePos = 0;
   
-    
-    // Create array of times and notes to loop through
-    let times = Object.keys(song);
-    let notes = Object.values(song);
-    let lastPlayed = 0;
-
-    // Loop through timestamps and set a delay for playing notes.
-    times.forEach(function(time) {
-      setTimeout(function() {
-        lastPlayed = time;
-        console.log("foobar");
-        let audio = new Audio(`./grand-piano-mp3-sounds/${notes[0]}.mp3`);
-        audio.currentTime = 0;
-        audio.play();
-        notes.shift();
-      }, time * 1000 - lastPlayed);
-    });
+  // Loop through timestamps and set a delay for playing notes.
+  times.forEach(function(time) {
+    setTimeout(function() {
+      lastPlayedTime = time;
+      console.log(notes[nextNotePos]);
+      let audio = new Audio(
+        `./grand-piano-mp3-sounds/${notes[nextNotePos]}.mp3`
+      );
+      audio.currentTime = 0;
+      audio.play();
+      nextNotePos++;
+    }, time * 1000 - lastPlayedTime);
+  });
 };
 
-module.exports = playback;
+module.exports = playSong;
