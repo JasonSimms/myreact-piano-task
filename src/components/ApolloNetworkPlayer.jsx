@@ -18,6 +18,15 @@ class Player extends Component {
 
     this._handleClick = this._handleClick.bind(this);
   }
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.isPlaying) {
+      // when the state is updated (turned red),
+      // a timeout is triggered to switch it back off
+      this.resetPlayerTimeout = setTimeout(() => {
+        this.setState(() => ({ isPlaying: false }));
+      }, this.state.songLength * 1000);
+    }
+  }
 
   render() {
     const client = new ApolloClient({
@@ -25,47 +34,56 @@ class Player extends Component {
     });
 
     const GET_SONGS = gql`
-    {
-      songs {
-        id
-        title
-        keysPlayed
-    }
-    }
-  `;
-    
+      {
+        songs {
+          id
+          title
+          music
+          duration
+        }
+      }
+    `;
 
     return (
       <ApolloProvider client={client}>
         <div>
           <h2>My first Apollo app</h2>
           <ol>
+            <Query query={GET_SONGS}>
+              {({ loading, error, data }) => {
+                if (loading) return <p>Loading...</p>;
+                if (error) return <p>Error :(</p>;
+                console.log(data.songs[1]);
+                return data.songs.map(el => {
+                  return (
+                    <li key={el.title}>
+                      <button
+                        className="song-btn"
+                        onClick={() => {
+                          this._handleClick(el.music, el.duration);
+                        }}
+                      >
+                        Listen to: {el.title} length: {Math.round(el.duration)}s
+                      </button>
+                    </li>
+                  );
 
-          <Query
-            query={GET_SONGS}
-            >
-            {({ loading, error, data }) => {
-              if (loading) return <p>Loading...</p>;
-              if (error) return <p>Error :(</p>;
-                console.log(data.songs)
-                return data.songs.map(el=>{
-                  return <li key={el.title}>{el.title}</li>
-                  
-                })
+                  // <li key={el.title}>{el.title}</li>
+                });
                 // return <p>{data.songs.toString()}</p>
               }}
-          </Query>
-              </ol>
+            </Query>
+          </ol>
         </div>
       </ApolloProvider>
     );
   }
 
-  _handleClick(key, time) {
-    console.log(time);
+  _handleClick(music, time) {
+    console.log(time,music);
     if (!this.state.isPlaying) {
       this.setState({ isPlaying: true, songLength: time });
-      playSong(key);
+      playSong(music);
     }
   }
 }

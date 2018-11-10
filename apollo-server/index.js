@@ -4,14 +4,16 @@ const songs = [
     {
         id: 1,
         title: 'Some song title',
-        music: [ 'C', 'D', 'E'],
-        duration: 5
+        duration: 5,
+        keysPlayed: ["D", "E", "F"],
+        keysTimeStamps: [1.0005,2.555512,3]
     },
     {
         id: 2,
-        duration: 3.400000000000001,
-        music: {0.8: "Ab4", 1.7999999999999998: "G4", 2.1999999999999997: "F4", 2.6: "E4", 3.0000000000000004: "Eb4"},
-        title: "NoTitle"
+        duration: 4,
+        title: "NoTitle",
+        keysPlayed: ["D", "E", "F"],
+        keysTimeStamps: [1.000005,2,3]
     }
 ];
 
@@ -19,9 +21,11 @@ const typeDefs = gql`
     type Song {
         id: ID!
         title: String
-        music: Object
-        duration: Number
+        keysPlayed: [String]
+        keysTimeStamps: [Float]
+        duration: Int
     }
+
 
     type Query {
         songs: [Song]

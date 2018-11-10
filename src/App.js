@@ -141,7 +141,7 @@ class App extends Component {
   _getSongLength(song) {
     const times = Object.keys(song);
     const lastTime = times[times.length - 1];
-    return Number(lastTime);
+    return Number(Math.ceil(lastTime));
   }
 
   // Delivers input field to state
