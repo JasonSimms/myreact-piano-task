@@ -39,7 +39,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <ApolloPlayer/>
+      {/* <ApolloPlayer/> */}
         <button className="testbtn" onClick={() => this._startRecord()}>
           Start Rec
         </button>

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import playSong from "./playSong";
 
-// import { render } from "react-dom";
 import ApolloClient from "apollo-boost";
 import gql from "graphql-tag";
 import { ApolloProvider, Query } from "react-apollo";
@@ -48,7 +47,7 @@ class Player extends Component {
     return (
       <ApolloProvider client={client}>
         <div>
-          <h2>My first Apollo app</h2>
+          <h2>Enjoy Database Library Songs:</h2>
           <ol>
             <Query query={GET_SONGS}>
               {({ loading, error, data }) => {
@@ -78,8 +77,6 @@ class Player extends Component {
   }
 
   _handleClick(notes,times, duration) {
-    console.log(`Notes: `,notes,`times:`,times,duration)
-
     if (!this.state.isPlaying) {
       this.setState({ isPlaying: true, songLength: duration });
       playSong(notes,times);
