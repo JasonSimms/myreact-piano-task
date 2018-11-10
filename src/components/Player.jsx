@@ -33,29 +33,19 @@ class Player extends Component {
       uri: "http://localhost:4000"
     });
 
-
-
-
     let myLibrary = this.props.library;
-    let mappedSongs = myLibrary.map((el,index) => {
+    let mappedSongs = myLibrary.map((el, index) => {
       return (
-      <NewSong
-song = {el}
-index = {index}
-handleClick = {this._handleClick}
-      />
+        <NewSong song={el} index={index} handleClick={this._handleClick} />
       );
     });
 
     return (
       <div>
         <h3>Playing: {this.props.song.title}</h3>
-        <h1>Song to post {this.songToPost}</h1>
         <br />
-        {this.state.isPlaying.toString()}
-        {this.state.songLength}
         <ApolloProvider client={client}>
-        <ul>{mappedSongs}</ul>
+          <ul>{mappedSongs}</ul>
         </ApolloProvider>
         <br />
       </div>
@@ -63,13 +53,11 @@ handleClick = {this._handleClick}
   }
 
   _handleClick(notes, times, duration) {
-    console.log(notes, times, duration);
     if (!this.state.isPlaying) {
       this.setState({ isPlaying: true, songLength: duration });
       playSong(notes, times);
     }
   }
-
 }
 
 export default Player;

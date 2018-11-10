@@ -49,8 +49,10 @@ class Player extends Component {
         <div>
           <h2>Enjoy Database Library Songs:</h2>
           <ol>
-            <Query query={GET_SONGS}>
-              {({ loading, error, data }) => {
+            <Query 
+            query={GET_SONGS}
+            pollInterval={500}>
+              {({ loading, error, data, startPolling, stopPolling }) => {
                 if (loading) return <p>Loading...</p>;
                 if (error) return <p>Error :(</p>;
                 console.log(data.songs[1]);

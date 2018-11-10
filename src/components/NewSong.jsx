@@ -79,7 +79,8 @@ class NewSong extends Component {
               Post Song
             </button>
           )}
-        </Mutation> : <p>uploaded!</p>
+        </Mutation> 
+        : <p>uploaded!</p>
         }
       </li>
     );
