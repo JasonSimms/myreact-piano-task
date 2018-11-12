@@ -5,8 +5,12 @@ import FlatKey from "./components/FlatKey";
 import TitleDisplay from "./components/TitleDisplay";
 import Player from "./components/Player";
 
-import {Button, ToggleButton, ToggleButtonGroup, ButtonToolbar} from "react-bootstrap"
-
+import {
+  Button,
+  ToggleButton,
+  ToggleButtonGroup,
+  ButtonToolbar
+} from "react-bootstrap";
 
 class App extends Component {
   constructor(props) {
@@ -46,37 +50,107 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        
         <TitleDisplay
           target={this.state.title}
           handleInputChange={this._handleInputChange}
         />
-
-        
+        <Player
+          song={this.state.song}
+          title={this.state.title}
+          library={this.state.library}
+        />
         <br />
         <div id="piano-controls">
-        <ButtonToolbar>
-    <ToggleButtonGroup type="checkbox" defaultValue={[3,4]}>
-    {!this.state.isRecording ? (
-          <Button bsStyle="danger" onClick={() => this._startRecord()}>
-            Record
-          </Button>
-        ) : (
-          <Button bsStyle="info" active onClick={() => this._stopRecord()}>
-            Stop Recording
-          </Button>
-        )}
-        <ToggleButton disabled>Select Desired Octaves:</ToggleButton>
-      <ToggleButton value={1} onChange={() => this.setState(prevState => ({ showOctave1: !prevState.showOctave1}))}>1</ToggleButton>
-      <ToggleButton value={2} onChange={() => this.setState(prevState => ({ showOctave2: !prevState.showOctave2}))}>2</ToggleButton>
-      <ToggleButton value={3} onChange={() => this.setState(prevState => ({ showOctave3: !prevState.showOctave3}))}>3</ToggleButton>
-      <ToggleButton value={4} onChange={() => this.setState(prevState => ({ showOctave4: !prevState.showOctave4}))}>4</ToggleButton>
-      <ToggleButton value={5} onChange={() => this.setState(prevState => ({ showOctave5: !prevState.showOctave5}))}>5</ToggleButton>
-      <ToggleButton value={6} onChange={() => this.setState(prevState => ({ showOctave6: !prevState.showOctave6}))}>6</ToggleButton>
-      <ToggleButton value={7} onChange={() => this.setState(prevState => ({ showOctave7: !prevState.showOctave7}))}>7</ToggleButton>
-    </ToggleButtonGroup>
-  </ButtonToolbar>
+          <ButtonToolbar>
+            <ToggleButtonGroup type="checkbox" defaultValue={[3, 4]}>
+              {!this.state.isRecording ? (
+                <Button bsStyle="danger" onClick={() => this._startRecord()}>
+                  Record
+                </Button>
+              ) : (
+                <Button
+                  bsStyle="info"
+                  active
+                  onClick={() => this._stopRecord()}
+                >
+                  Stop Recording
+                </Button>
+              )}
+              <ToggleButton disabled>Select Desired Octaves:</ToggleButton>
+              <ToggleButton
+                value={1}
+                onChange={() =>
+                  this.setState(prevState => ({
+                    showOctave1: !prevState.showOctave1
+                  }))
+                }
+              >
+                1
+              </ToggleButton>
+              <ToggleButton
+                value={2}
+                onChange={() =>
+                  this.setState(prevState => ({
+                    showOctave2: !prevState.showOctave2
+                  }))
+                }
+              >
+                2
+              </ToggleButton>
+              <ToggleButton
+                value={3}
+                onChange={() =>
+                  this.setState(prevState => ({
+                    showOctave3: !prevState.showOctave3
+                  }))
+                }
+              >
+                3
+              </ToggleButton>
+              <ToggleButton
+                value={4}
+                onChange={() =>
+                  this.setState(prevState => ({
+                    showOctave4: !prevState.showOctave4
+                  }))
+                }
+              >
+                4
+              </ToggleButton>
+              <ToggleButton
+                value={5}
+                onChange={() =>
+                  this.setState(prevState => ({
+                    showOctave5: !prevState.showOctave5
+                  }))
+                }
+              >
+                5
+              </ToggleButton>
+              <ToggleButton
+                value={6}
+                onChange={() =>
+                  this.setState(prevState => ({
+                    showOctave6: !prevState.showOctave6
+                  }))
+                }
+              >
+                6
+              </ToggleButton>
+              <ToggleButton
+                value={7}
+                onChange={() =>
+                  this.setState(prevState => ({
+                    showOctave7: !prevState.showOctave7
+                  }))
+                }
+              >
+                7
+              </ToggleButton>
+            </ToggleButtonGroup>
+          </ButtonToolbar>
         </div>
+
         <div id="piano">
           {/* Draw piano octaves programmatically */}
           {this.state.showOctave0 ? this._drawAnOctave(0) : null}
@@ -88,11 +162,6 @@ class App extends Component {
           {this.state.showOctave6 ? this._drawAnOctave(6) : null}
           {this.state.showOctave7 ? this._drawAnOctave(7) : null}
         </div>
-        <Player
-          song={this.state.song}
-          title={this.state.title}
-          library={this.state.library}
-        />
       </div>
     );
   }
@@ -163,7 +232,7 @@ class App extends Component {
 
     return (
       <div className="octave">
-        <div className="whiteKeys">{pianoKeys}</div>
+        <div className="white-keys">{pianoKeys}</div>
         <div className="flats">{flatKeys}</div>
       </div>
     );
@@ -181,7 +250,6 @@ class App extends Component {
       [key]: newValue
     });
   }
-
 }
 
 export default App;

@@ -1,7 +1,9 @@
 .apollo-container{
-    background-color: grey;
-    width: 100vw;
+    width: 98vw;
     height: auto;
+    display: flex;
+    flex-direction: row;
+    margin: 2px 5px;
 }
 
 .sidescroll-menu{
@@ -12,7 +14,7 @@
 
 .sidescroll-item{
     display: inline-block;
-    color: white;
+    color: ivory;
     text-align: center;
     padding: 14px;
     text-decoration: none;

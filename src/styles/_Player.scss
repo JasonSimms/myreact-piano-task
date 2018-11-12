@@ -1,18 +1,27 @@
-.song-btn{
-  padding: 10px;
-  margin: 0;
-  height: auto;
-    background-color: purple;
-    border-radius: 5px;
-    border: none;
-  }
-  
-  
-  .btn:disabled{ 
-    background-color:black;
-    }
+$playerRadius: 5px;
 
-.list-group-item{
-  padding: 0;
-  
+#player{
+  // width: 90%;
+  align-self: center;
+}
+
+.play-btn {
+  margin-left: 3px;
+  background-color: rgb(235, 213, 94);
+
+  border-right:0;
+  border-top-left-radius:$playerRadius;
+  border-bottom-left-radius: $playerRadius;
+}
+
+.post-btn {
+  color: ivory;
+  background-color: rgba(82, 209, 220, 0.342);
+  border-left:0;
+  border-top-right-radius:$playerRadius;
+  border-bottom-right-radius: $playerRadius;
+}
+
+.title-input {
+  height: 1.8em;
 }

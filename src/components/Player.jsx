@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import playSong from "./playSong";
 
 import ApolloClient from "apollo-boost";
-import {  ApolloProvider } from "react-apollo";
+import { ApolloProvider } from "react-apollo";
 import NewSong from "./NewSong";
 
-import {ListGroup} from "react-bootstrap"
-
+import { ListGroup } from "react-bootstrap";
 
 class Player extends Component {
   constructor(props) {
@@ -38,18 +37,15 @@ class Player extends Component {
     let myLibrary = this.props.library;
     let mappedSongs = myLibrary.map((el, index) => {
       return (
-        <NewSong className="sidescroll-item" song={el} index={index} handleClick={this._handleClick} />
+        <NewSong song={el} index={index} handleClick={this._handleClick} />
       );
     });
 
     return (
-      <div>
-        <h3>Playing: {this.props.song.title}</h3>
-        <br />
+      <div id="player">
         <ApolloProvider client={client}>
-          <ListGroup className="sidescroll-menu">{mappedSongs}</ListGroup>
+          <ListGroup>{mappedSongs}</ListGroup>
         </ApolloProvider>
-        <br />
       </div>
     );
   }
