@@ -27,6 +27,10 @@ class Player extends Component {
     }
   }
 
+  componentShouldUpdate(){
+    return false;
+  }
+
   render() {
     const client = new ApolloClient({
       uri: "http://localhost:4000"
@@ -51,7 +55,9 @@ class Player extends Component {
           <div className="sidescroll-menu">
             <Query 
             query={GET_SONGS}
-            pollInterval={500}>
+            pollInterval={1500}
+            // skip={{this.state.isPlaying ? true}}
+            >
               {({ loading, error, data, startPolling, stopPolling }) => {
                 if (loading) return <p>Loading...</p>;
                 if (error) return <p>Apollo Server Not Running..cd Apollo-server/README for instructions...</p>;

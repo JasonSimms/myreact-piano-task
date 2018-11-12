@@ -62,6 +62,9 @@ class App extends Component {
           </button>
         )}
         <br />
+        <div id="piano-controls">
+        
+        </div>
         <div id="piano">
           {/* Draw piano octaves programmatically */}
           {this.state.showOctave0 ? this._drawAnOctave(0) : null}
@@ -175,6 +178,7 @@ class App extends Component {
   _drawPiano() {
     return this._drawAnOctave(3);
   }
+
 }
 
 export default App;
