@@ -68,10 +68,10 @@ class Player extends Component {
                 if (loading) return <p>Loading...</p>;
                 if (error)
                   return (
-                    <p>
+                    <h4>
                       Apollo Server Not Running..cd Apollo-server/README for
                       instructions...
-                    </p>
+                    </h4>
                   );
                 return data.songs.map(el => {
                   return (
