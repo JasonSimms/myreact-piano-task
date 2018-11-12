@@ -22,14 +22,14 @@ Optional Apollo Server: (Serves as a local Database)
 - Piano offers range of Octaves that can be toggled on and Off.
 - Click the keys to play the piano.
 - Record button will automatically create a song file for you with the title provided when user selects "Stop Recording"
-- Users have the option to here their song played back again or upload it to the Apollo Server.
+- Users have the option to hear their song played back again or upload it to the Apollo Server.
 
 ------
 ### About this Project:
 1. Create-React-App Template:
-- Build was ejected and modified for SASS support and heroku deployment.
+- Build was ejected and modified for SASS support and heroku deployment. Sass is used to store variables and offers great organization flexibility.
 
-2. The Piano is constructed of HTML <button/>'s stylized and positioned in Octaves.  
+2. The Piano is constructed of HTML button's stylized and positioned in Octaves.  
 - The black keys irregular pattern is achieved with a hidden Button of equal size marked X and X2.
 
 3. Song's are composed of two matching length arrays. 1 of notes and the other of time stamps when to play those notes.  
@@ -39,7 +39,7 @@ Optional Apollo Server: (Serves as a local Database)
 
 5. React-Apollo provided some plugin solutions for quering data and provide refreshed access to the Database.
 
-
+------
 #### Challenges:
 1. Props Communications and state control:
 - I attempted to segregate components in a logical fashion while keeping the Piano rendered directly in src/App.js since that is the point of the most input from the user.
@@ -54,9 +54,9 @@ Optional Apollo Server: (Serves as a local Database)
 - Key configurations were daunting, an SVG file with embedded functions might offer more controls.  But the mapped Buttons allowed me to draw the Piano programmatically and allowed quick flexibility of drawing any number of octaves I wanted.
 
 5. Apollo:
-- I have no previous exposure to Apollo-servers and Graphql.  The documentation was not very reader friendly. Given the opportunity I will finish more tutorials and look for added value.  The best feature I found was in Apollo-React offering a "polling" feature allowing for regular refreshing without hassle.
+- Given the opportunity I will finish more tutorials and look for added value.  The best feature I found was in Apollo-React offering a "polling" feature allowing for regular refreshing without hassle.
 
-
+------
 #### For the Future:
 - I hope to explore more uses of Apollo and GraphQl and include them in the Heroku Deployment so users can share songs.
 

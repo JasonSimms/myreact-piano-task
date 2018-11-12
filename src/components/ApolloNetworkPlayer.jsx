@@ -73,7 +73,6 @@ class Player extends Component {
                       instructions...
                     </p>
                   );
-                console.log(data.songs[1]);
                 return data.songs.map(el => {
                   return (
                     <Button

@@ -16,7 +16,7 @@ class PianoKey extends Component {
   render() {
     return (
       <button className="key" onClick={this._togglePlay}>
-        {this.props.note}
+        <p>{this.props.note}</p>
       </button>
     );
   }

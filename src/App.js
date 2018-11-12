@@ -20,7 +20,6 @@ class App extends Component {
       error: null,
       note: null,
       song: [],
-      displaySong: [],
       isRecording: false,
       time: 0,
       title: "Hello_World!",
@@ -76,7 +75,9 @@ class App extends Component {
                   Stop Recording
                 </Button>
               )}
-              <ToggleButton value={666} disabled>Select Desired Octaves:</ToggleButton>
+              <ToggleButton value={666} disabled>
+                Select Desired Octaves:
+              </ToggleButton>
               <ToggleButton
                 value={1}
                 onChange={() =>
@@ -166,12 +167,13 @@ class App extends Component {
     );
   }
 
-
   //  IN USE Functions
+
+  // Initiate a timer used for marking time in recording music.
   _startRecord() {
     if (!this.state.isRecording) {
       this.currentRecording = {};
-      this.setState({ time: 0, isRecording: true, displaySong: [] });
+      this.setState({ time: 0, isRecording: true });
       const increment = 0.2;
       this.timer = setInterval(() => {
         this.setState(prevState => ({ time: prevState.time + increment }));
@@ -179,6 +181,12 @@ class App extends Component {
     }
   }
 
+  // While recording add a played note to the song object.
+  _playNote(note) {
+    if (this.state.isRecording) this.currentRecording[this.state.time] = note;
+  }
+
+  // Build an object for storing a song that will support playback
   _stopRecord() {
     if (this.state.isRecording) {
       let thisSong = {
@@ -200,10 +208,7 @@ class App extends Component {
     }
   }
 
-  _playNote(note) {
-    if (this.state.isRecording) this.currentRecording[this.state.time] = note;
-  }
-
+  // Programmatically draw a complete octave.
   _drawAnOctave(octave) {
     const keys = ["C", "D", "E", "F", "G", "A", "B"];
     const flats = ["X", "Db", "Eb", "X2", "Gb", "Ab", "Bb"];
@@ -236,6 +241,7 @@ class App extends Component {
     );
   }
 
+  // Calculate song durations for interlocks in playback.
   _getSongLength(song) {
     const times = Object.keys(song);
     const lastTime = times[times.length - 1];

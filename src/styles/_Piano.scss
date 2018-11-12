@@ -1,14 +1,10 @@
 $keyborder: 1px;
 $keyWidth: 40px;
-$keyHeight: 250px;
+$keyHeight: 200px;
 $flatWidth: ($keyWidth + $keyborder) * 0.6;
 $flatHeight: 100px;
 
-// $pressedKey:rgb(0, 89, 167);
-$pressedKey:#52D1DC;
-
-
-
+$pressedKey: #52d1dc;
 
 #piano {
   border-radius: 10px;
@@ -18,10 +14,12 @@ $pressedKey:#52D1DC;
   flex-wrap: wrap;
   justify-content: flex-start;
   align-content: flex-start;
-  height: 2*$keyHeight+4*$keyborder;
+  height: 2 * $keyHeight + 4 * $keyborder;
   margin-top: 1vh;
 }
-
+.key > p {
+  padding-top: 80px;
+}
 .key {
   text-align: center;
   width: $keyWidth;
@@ -47,13 +45,12 @@ $pressedKey:#52D1DC;
 
 .octave {
   position: relative;
-  width: 7*$keyWidth !important;
+  width: 7 * $keyWidth !important;
 }
 
 .white-keys {
   width: auto;
 }
-
 
 .flats {
   position: absolute;
