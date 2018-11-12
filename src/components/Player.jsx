@@ -37,7 +37,7 @@ class Player extends Component {
     let myLibrary = this.props.library;
     let mappedSongs = myLibrary.map((el, index) => {
       return (
-        <NewSong song={el} index={index} handleClick={this._handleClick} />
+        <NewSong key={el+index} song={el} index={index} handleClick={this._handleClick} />
       );
     });
 

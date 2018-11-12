@@ -7,8 +7,6 @@ times: sets a Timeout for timing accuracy.
 */
 
 const playSong = (notes, times) => {
-// Debug:
-console.log(`playSong.js Recieved Notes:`,notes,`times =>`,times)
 
   // Recursion controls for progressing through the arrays 
   let lastPlayedTime = 0;

@@ -76,7 +76,7 @@ class App extends Component {
                   Stop Recording
                 </Button>
               )}
-              <ToggleButton disabled>Select Desired Octaves:</ToggleButton>
+              <ToggleButton value={666} disabled>Select Desired Octaves:</ToggleButton>
               <ToggleButton
                 value={1}
                 onChange={() =>
@@ -173,7 +173,6 @@ class App extends Component {
     if (!this.state.isRecording) {
       this.currentRecording = {};
       this.setState({ time: 0, isRecording: true, displaySong: [] });
-      console.log(`Record Started`);
       const increment = 0.2;
       this.timer = setInterval(() => {
         this.setState(prevState => ({ time: prevState.time + increment }));
