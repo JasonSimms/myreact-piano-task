@@ -1,4 +1,7 @@
 .song-btn{
+  padding: 10px;
+  margin: 0;
+  height: auto;
     background-color: purple;
     border-radius: 5px;
     border: none;
@@ -8,3 +11,8 @@
   .btn:disabled{ 
     background-color:black;
     }
+
+.list-group-item{
+  padding: 0;
+  
+}

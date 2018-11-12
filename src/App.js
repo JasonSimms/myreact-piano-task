@@ -5,6 +5,7 @@ import FlatKey from "./components/FlatKey";
 import TitleDisplay from "./components/TitleDisplay";
 import Player from "./components/Player";
 
+import {Button, ToggleButton, ToggleButtonGroup, ButtonToolbar} from "react-bootstrap"
 
 
 class App extends Component {
@@ -23,10 +24,10 @@ class App extends Component {
       showOctave0: false,
       showOctave1: false,
       showOctave2: false,
-      showOctave3: false,
+      showOctave3: true,
       showOctave4: true,
-      showOctave5: true,
-      showOctave6: true,
+      showOctave5: false,
+      showOctave6: false,
       showOctave7: false
     };
     this.currentRecording = {};
@@ -37,7 +38,6 @@ class App extends Component {
     this._drawAnOctave = this._drawAnOctave.bind(this);
     this._handleInputChange = this._handleInputChange.bind(this);
     this._getSongLength = this._getSongLength.bind(this);
-    this._drawPiano = this._drawPiano.bind(this);
   }
 
   componentDidMount() {
@@ -52,18 +52,30 @@ class App extends Component {
           handleInputChange={this._handleInputChange}
         />
 
-        {!this.state.isRecording ? (
-          <button className="testbtn" onClick={() => this._startRecord()}>
-            Record
-          </button>
-        ) : (
-          <button className="testbtn" onClick={() => this._stopRecord()}>
-            Stop Recording
-          </button>
-        )}
+        
         <br />
         <div id="piano-controls">
-        
+        <ButtonToolbar>
+    <ToggleButtonGroup type="checkbox" defaultValue={[3,4]}>
+    {!this.state.isRecording ? (
+          <Button bsStyle="danger" onClick={() => this._startRecord()}>
+            Record
+          </Button>
+        ) : (
+          <Button bsStyle="info" active onClick={() => this._stopRecord()}>
+            Stop Recording
+          </Button>
+        )}
+        <ToggleButton disabled>Select Desired Octaves:</ToggleButton>
+      <ToggleButton value={1} onChange={() => this.setState(prevState => ({ showOctave1: !prevState.showOctave1}))}>1</ToggleButton>
+      <ToggleButton value={2} onChange={() => this.setState(prevState => ({ showOctave2: !prevState.showOctave2}))}>2</ToggleButton>
+      <ToggleButton value={3} onChange={() => this.setState(prevState => ({ showOctave3: !prevState.showOctave3}))}>3</ToggleButton>
+      <ToggleButton value={4} onChange={() => this.setState(prevState => ({ showOctave4: !prevState.showOctave4}))}>4</ToggleButton>
+      <ToggleButton value={5} onChange={() => this.setState(prevState => ({ showOctave5: !prevState.showOctave5}))}>5</ToggleButton>
+      <ToggleButton value={6} onChange={() => this.setState(prevState => ({ showOctave6: !prevState.showOctave6}))}>6</ToggleButton>
+      <ToggleButton value={7} onChange={() => this.setState(prevState => ({ showOctave7: !prevState.showOctave7}))}>7</ToggleButton>
+    </ToggleButtonGroup>
+  </ButtonToolbar>
         </div>
         <div id="piano">
           {/* Draw piano octaves programmatically */}
@@ -75,16 +87,12 @@ class App extends Component {
           {this.state.showOctave5 ? this._drawAnOctave(5) : null}
           {this.state.showOctave6 ? this._drawAnOctave(6) : null}
           {this.state.showOctave7 ? this._drawAnOctave(7) : null}
-
-          {/* {this._drawAnOctave(5)} */}
         </div>
         <Player
           song={this.state.song}
           title={this.state.title}
           library={this.state.library}
         />
-        <h3>Your Song</h3>
-        {this.state.displaySong}
       </div>
     );
   }
@@ -126,7 +134,6 @@ class App extends Component {
   }
 
   _playNote(note) {
-    // console.log(note);
     if (this.state.isRecording) this.currentRecording[this.state.time] = note;
   }
 
@@ -173,10 +180,6 @@ class App extends Component {
     this.setState({
       [key]: newValue
     });
-  }
-
-  _drawPiano() {
-    return this._drawAnOctave(3);
   }
 
 }

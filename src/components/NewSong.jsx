@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 
+import {ListGroupItem, ListGroup} from "react-bootstrap"
+
+
 class NewSong extends Component {
   constructor(props) {
     super(props);
@@ -37,7 +40,7 @@ class NewSong extends Component {
     `;
 
     return (
-      <div key={this.props.song + this.props.index}>
+      <ListGroupItem key={this.props.song + this.props.index}>
         {!this.state.isHidden ? (
           <div>
             <button
@@ -80,7 +83,7 @@ class NewSong extends Component {
         ) : (
           <p>{this.props.song.title} uploaded!</p>
         )}
-      </div>
+      </ListGroupItem>
     );
   }
 
