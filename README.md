@@ -1,31 +1,70 @@
-# React Piano Task
+# React Piano Task by Jason Simms
 
-Build a small piano application that can play sounds, as well as store and retrieve sequences of played keys (songs).
+[![DeepScan grade](https://deepscan.io/api/teams/2472/projects/3588/branches/31874/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=2472&pid=3588&bid=31874)
 
-*If anything here is unclear or any questions come to your mind, don’t hesitate to contact us - we’re here for you!*
+## To Use:
 
-## Implementation instructions
+TL:DR [Visit the Deployed Version](https://myreact-piano.herokuapp.com/)
 
-- Focus on **clean, readable Code** and **Simplicity**
-- Use **React** for the Frontend
-- For the piano sounds you can use the [given files](#piano-sounds) files or any of your choice
+1.  Clone this repository
+2.  $ cd myreact-piano-task
+3.  $ npm install
+4.  $ npm start
 
-## Minimum requirements
+Optional Apollo Server: (Serves as a local Database)
 
-- Piano UI:
-    - Clickable black and white keys, which play a sound when clicked
-    - Visual feedback on touching the keys
-- Song storage & playback functionality:
-    - Provide a button to start/stop recording a sequence of keys played on the Piano UI
-    - Define a song title when storing a song on stop recording
-    - Show a list of stored songs with title
-    - Enable replaying stored songs with a small play button next to the title
+1.  $ cd apollo-server
+2.  $ npm install
+3.  $ npm start
 
-## Optional features
 
-- Enable **correct timing** of played keys for recording & playing songs
-- Store and retrieve the songs from a **GraphQL** server instead of from a local storage (sample server given here: [Apollo Server](apollo-server))
+## Instruction:
+- Piano offers range of Octaves that can be toggled on and Off.
+- Click the keys to play the piano.
+- Record button will automatically create a song file for you with the title provided when user selects "Stop Recording"
+- Users have the option to here their song played back again or upload it to the Apollo Server.
 
-## Piano Sounds
+------
+### About this Project:
+1. Create-React-App Template:
+- Build was ejected and modified for SASS support and heroku deployment.
 
-The directory `grand-piano-mp3-sounds` contains sample sounds you can use for this task. Alternatively you can use sounds from `https://github.com/pffy/mp3-piano-sound` or other sample sounds of your preference.
+2. The Piano is constructed of HTML <button/>'s stylized and positioned in Octaves.  
+- The black keys irregular pattern is achieved with a hidden Button of equal size marked X and X2.
+
+3. Song's are composed of two matching length arrays. 1 of notes and the other of time stamps when to play those notes.  
+- SetTimeOut is used to achieve proper timing and recalculated after every note.
+
+4. ReactBootstrap is used for some quick styling solutions and basic collapse functions.
+
+5. React-Apollo provided some plugin solutions for quering data and provide refreshed access to the Database.
+
+
+#### Challenges:
+1. Props Communications and state control:
+- I attempted to segregate components in a logical fashion while keeping the Piano rendered directly in src/App.js since that is the point of the most input from the user.
+
+2. Dealing with Audio:
+- Most instances where audio is played needed to have boolean interlocks which either allowed playing in rapid succession or not playing because something else was going on.
+
+3. Playing a recording:
+- I approached playback of notes needing to played at a certain time, originally I worked with an object, where the key is a time stamp and the note played at that time is the value.  For integration purposes with the example Apollo server I changed the function to work with two arrays of equal length. Since they are constructed during storage from the original Object it is unlikely there should be a discrepency of notes vs times.
+
+4. Drawing the Piano:
+- Key configurations were daunting, an SVG file with embedded functions might offer more controls.  But the mapped Buttons allowed me to draw the Piano programmatically and allowed quick flexibility of drawing any number of octaves I wanted.
+
+5. Apollo:
+- I have no previous exposure to Apollo-servers and Graphql.  The documentation was not very reader friendly. Given the opportunity I will finish more tutorials and look for added value.  The best feature I found was in Apollo-React offering a "polling" feature allowing for regular refreshing without hassle.
+
+
+#### For the Future:
+- I hope to explore more uses of Apollo and GraphQl and include them in the Heroku Deployment so users can share songs.
+
+- Key Press animations can be embelished
+
+- During Music Playback the keys could animate along with the song.
+
+- Tutorials could show users where to play a key for a certain song.
+
+
+

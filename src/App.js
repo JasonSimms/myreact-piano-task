@@ -166,7 +166,6 @@ class App extends Component {
     );
   }
 
-  // SandBox Functions
 
   //  IN USE Functions
   _startRecord() {

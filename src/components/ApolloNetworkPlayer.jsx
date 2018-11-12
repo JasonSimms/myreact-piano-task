@@ -78,7 +78,6 @@ class Player extends Component {
                   return (
                     <Button
                     key={el.id}
-                    // className="sidescroll-item"
                     onClick={() => {
                       this._handleClick(
                         el.keysPlayed,
