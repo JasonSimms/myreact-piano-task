@@ -17,8 +17,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   // background: $blueColor;
   background: #799f0c; /* fallback for old browsers */
-  background-image: -webkit-linear-gradient(to top, #799f0c, #acbb78); /* Chrome 10-25, Safari 5.1-6 */
-  background-image: linear-gradient(to top, #799f0c, #acbb78); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-image: -webkit-linear-gradient(to top, #acbb78, #e0e2da); /* Chrome 10-25, Safari 5.1-6 */
+  background-image: linear-gradient(to top,  #acbb78, #e0e2da); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   height: 100vh;
   font-size: 1rem;
 }

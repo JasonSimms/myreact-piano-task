@@ -5,6 +5,9 @@ import ApolloClient from "apollo-boost";
 import {  ApolloProvider } from "react-apollo";
 import NewSong from "./NewSong";
 
+import {ListGroup} from "react-bootstrap"
+
+
 class Player extends Component {
   constructor(props) {
     super(props);
@@ -44,7 +47,7 @@ class Player extends Component {
         <h3>Playing: {this.props.song.title}</h3>
         <br />
         <ApolloProvider client={client}>
-          <div className="sidescroll-menu">{mappedSongs}</div>
+          <ListGroup className="sidescroll-menu">{mappedSongs}</ListGroup>
         </ApolloProvider>
         <br />
       </div>
