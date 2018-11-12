@@ -5,7 +5,7 @@ class Email extends Component {
     return (
       <div className="input-form">
         <h4 className="input-title">
-          What Should Your Next Song Be Called?:
+          What Should Your Next Song Be Called?  
           <input
             type="string"
             value={this.props.target}

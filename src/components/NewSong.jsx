@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 
-import {ListGroupItem, ListGroup} from "react-bootstrap"
+import {ListGroupItem} from "react-bootstrap"
 
 
 class NewSong extends Component {
@@ -40,11 +40,14 @@ class NewSong extends Component {
     `;
 
     return (
-      <ListGroupItem key={this.props.song + this.props.index}>
+      <ListGroupItem 
+      className="new-song"
+      key={this.props.song + this.props.index}>
         {!this.state.isHidden ? (
           <div>
-            <button
-              className="song-btn"
+           {this.props.song.title} Duration:{" "}
+              {Math.round(this.props.song.duration)}s
+            <button className="play-btn"
               onClick={() => {
                 this.props.handleClick(
                   this.props.song.keysPlayed,
@@ -53,15 +56,12 @@ class NewSong extends Component {
                 );
               }}
             >
-              Listen to: {this.props.song.title} length:{" "}
-              {Math.round(this.props.song.duration)}s
+              Play!
             </button>
             <Mutation mutation={ADD_SONG}>
               {(addSong, { data }) => (
                 <button
-                  ref={btn => {
-                    this.btn = btn;
-                  }}
+                className="post-btn"
                   onClick={e => {
                     e.preventDefault();
                     addSong({
