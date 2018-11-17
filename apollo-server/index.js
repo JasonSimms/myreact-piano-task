@@ -169,7 +169,7 @@ const server = new ApolloServer({ typeDefs, resolvers });
 // server.listen().then(({ url }) => {
 //     console.log(`Apollo server running: ${url}`);
 // });
-server.set('port', (process.env.PORT || 4000));
-server.listen(server.get('port'),(port) => {
-  console.log(`🚀 Server ready at ${port}`);
+
+server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
+  console.log(`🚀 Server ready at ${url}`);
 });
