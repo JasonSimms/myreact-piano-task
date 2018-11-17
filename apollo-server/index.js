@@ -166,7 +166,21 @@ const resolvers = {
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
-console.log(`env.PORT?`, process.env.PORT)
+const {
+  NODE_ENV,
+  PORT,
+} = process.env;
+
+const isNotProduction = NODE_ENV !== 'production';
+
+console.log(
+  '\nprocess.env.NODE_ENV', NODE_ENV,
+  '\nprocess.env.PORT', PORT,
+);
+
+
+
+
 server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
   console.log(`🚀 Server ready at ${url}`);
 });
