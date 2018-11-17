@@ -36,6 +36,7 @@ class Player extends Component {
 
   render() {
     const port = process.env.PORT || 4000;
+    console.log(`ApolloPlayer Port?:`,port)
     const client = new ApolloClient({
       uri: port
     });
