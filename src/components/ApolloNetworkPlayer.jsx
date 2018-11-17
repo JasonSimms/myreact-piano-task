@@ -35,8 +35,9 @@ class Player extends Component {
   }
 
   render() {
+    const port = process.env.PORT || 4000;
     const client = new ApolloClient({
-      uri: "http://localhost:4000"
+      uri: port
     });
 
     const GET_SONGS = gql`
