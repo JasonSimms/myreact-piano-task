@@ -64,12 +64,13 @@
     "concurrently": "^3.6.1"
   },
   "scripts": {
-    "start": "node scripts/start.js",
+    "app": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
     "server": "cd apollo-server && npm start",
-    "dev": "concurrently --kill-others \"npm run server\" \"npm start\"",
-    "heroku-postbuild": "cd apollo-server && npm install && npm start"
+    "dev": "concurrently --kill-others \"npm run server\" \"npm app\"",
+    "start":"concurrently --kill-others \"npm run app\" \"npm run server\" ",
+    "heroku-postbuild": "cd apollo-server && npm install && npm app"
   },
   "eslintConfig": {
     "extends": "react-app"
