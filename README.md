@@ -11,11 +11,9 @@ TL:DR [Visit the Deployed Version](https://myreact-piano.herokuapp.com/)
 3.  $ npm install
 4.  $ npm start
 
-Optional Apollo Server: (Serves as a local Database)
+Optional Piano Only:
 
-1.  $ cd apollo-server
-2.  $ npm install
-3.  $ npm start
+1.  $ npm run app
 
 
 ## Instruction:
