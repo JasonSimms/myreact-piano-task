@@ -70,6 +70,9 @@
     "test": "node scripts/test.js",
     "server": "cd apollo-server && npm start",
     "start": "concurrently --kill-others \"npm run server\" \"npm run app\""
+    "dev": "concurrently --kill-others \"npm run server\" \"npm app\"",
+    "heroku-postbuild": "cd apollo-server && npm install && npm app"
+
   },
   "eslintConfig": {
     "extends": "react-app"
