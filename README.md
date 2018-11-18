@@ -9,13 +9,8 @@ TL:DR [Visit the Deployed Version](https://myreact-piano.herokuapp.com/)
 1.  Clone this repository
 2.  $ cd myreact-piano-task
 3.  $ npm install
-4.  $ npm start
+4.  $ npm start (launches app & server now locally)
 
-Optional Apollo Server: (Serves as a local Database)
-
-1.  $ cd apollo-server
-2.  $ npm install
-3.  $ npm start
 
 
 ## Instruction:
