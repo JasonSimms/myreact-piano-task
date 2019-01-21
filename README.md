@@ -4,8 +4,6 @@
 
 ## To Use:
 
-TL:DR [Visit the Deployed Version](https://myreact-piano.herokuapp.com/)
-
 1.  Clone this repository
 2.  $ cd myreact-piano-task
 3.  $ npm install
